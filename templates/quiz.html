@@ -1,0 +1,60 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Math Quiz</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header>
+<h1>Math Tutorial</h1>
+<nav>
+<a href="/">Home</a>
+<a href="/topics">Topics</a>
+<a href="/quiz">Quiz</a>
+<a href="/contact">Contact</a>
+</nav>
+</header>
+
+<main>
+
+<section id="quiz-content">
+<h2>Math Quiz</h2>
+
+<p>
+Take this quiz to test your understanding of {{ topic_name }}. Good luck!
+</p>
+
+<form action="/quiz/submit" method="post">
+{% for question in questions %}
+<div class="question">
+<p>{{ question.text }}</p>
+
+{% if question.type == "multiple_choice" %}
+<ul>
+{% for option in question.options %}
+<li><input type="radio" name="question_{{ question.id }}" value="{{ option }}"> {{ option }}</li>
+{% endfor %}
+</ul>
+{% elif question.type == "open_ended" %}
+<input type="text" name="question_{{ question.id }}">
+{% endif %}
+</div>
+{% endfor %}
+
+<input type="submit" value="Submit Quiz">
+</form>
+
+</section>
+
+</main>
+
+<footer>
+<p>Copyright &copy; 2023 Math Tutorial Website</p>
+</footer>
+
+</body>
+</html>
+
+
